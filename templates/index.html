@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box">
+            <!-- Chat messages will appear here -->
+        </div>
+        
+        <div class="button-container">
+            <button class="chat-button" data-button="1">Button 1</button>
+            <button class="chat-button" data-button="2">Button 2</button>
+            <button class="chat-button" data-button="3">Button 3</button>
+            <button class="chat-button" data-button="4">Button 4</button>
+        </div>
+
+        <input type="text" id="user-message" placeholder="Type a message...">
+        <button id="send-button">Send</button>
+    </div>
+
+    <script>
+        // Function to read text aloud using SpeechSynthesis
+        function speakMessage(message) {
+            var msg = new SpeechSynthesisUtterance(message);
+            window.speechSynthesis.speak(msg);
+        }
+
+        // Send message when button is clicked
+        document.querySelectorAll('.chat-button').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var buttonNumber = this.getAttribute('data-button');
+                var message = 'You clicked Button ' + buttonNumber;
+                addMessage(message); // Show message in chat
+
+                // Read the message aloud
+                speakMessage(message);
+
+                // Send button click data to the server
+                fetch('/get_response', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'user_message=Button ' + buttonNumber
+                })
+                .then(response => response.json())
+                .then(data => {
+                    addMessage('Bot: ' + data.response);
+                    speakMessage(data.response); // Read out the bot response
+                });
+            });
+        });
+
+        // Send regular message when "Send" button is clicked
+        document.getElementById('send-button').addEventListener('click', function() {
+            var userMessage = document.getElementById('user-message').value;
+            if (userMessage) {
+                addMessage('You: ' + userMessage);
+                document.getElementById('user-message').value = '';
+
+                // Read out the user message
+                speakMessage(userMessage);
+
+                fetch('/get_response', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'user_message=' + userMessage
+                })
+                .then(response => response.json())
+                .then(data => {
+                    addMessage('Bot: ' + data.response);
+                    speakMessage(data.response); // Read out the bot response
+                });
+            }
+        });
+
+        // Function to add message to the chatbox
+        function addMessage(message) {
+            var chatBox = document.getElementById('chat-box');
+            var messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.textContent = message;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>

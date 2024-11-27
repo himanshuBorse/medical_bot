@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box">
+            <!-- Chat messages will appear here -->
+        </div>
+        
+        <div class="button-container">
+            <button class="chat-button" data-button="1">Button 1</button>
+            <button class="chat-button" data-button="2">Button 2</button>
+            <button class="chat-button" data-button="3">Button 3</button>
+            <button class="chat-button" data-button="4">Button 4</button>
+        </div>
+
+        <input type="text" id="user-message" placeholder="Type a message...">
+        <button id="send-button">Send</button>
+    </div>
+
+    <script>
+        // Function to read text aloud using SpeechSynthesis
+        function speakMessage(message) {
+            var msg = new SpeechSynthesisUtterance(message);
+            window.speechSynthesis.speak(msg);
+        }
+
+        // Send message when button is clicked
+        document.querySelectorAll('.chat-button').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var buttonNumber = this.getAttribute('data-button');
+                var message = 'You clicked Button ' + buttonNumber;
+                addMessage(message); // Show message in chat
+
+                // Read the message aloud
+                speakMessage(message);
+
+                // Send button click data to the server
+                fetch('/get_response', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'user_message=Button ' + buttonNumber
+                })
+                .then(response => response.json())
+                .then(data => {
+                    addMessage('Bot: ' + data.response);
+                    speakMessage(data.response); // Read out the bot response
+                });
+            });
+        });
+
+        // Send regular message when "Send" button is clicked
+        document.getElementById('send-button').addEventListener('click', function() {
+            var userMessage = document.getElementById('user-message').value;
+            if (userMessage) {
+                addMessage('You: ' + userMessage);
+                document.getElementById('user-message').value = '';
+
+                // Read out the user message
+                speakMessage(userMessage);
+
+                fetch('/get_response', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'user_message=' + userMessage
+                })
+                .then(response => response.json())
+                .then(data => {
+                    addMessage('Bot: ' + data.response);
+                    speakMessage(data.response); // Read out the bot response
+                });
+            }
+        });
+
+        // Function to add message to the chatbox
+        function addMessage(message) {
+            var chatBox = document.getElementById('chat-box');
+            var messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.textContent = message;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
+
+----------------------------------------------------------------
+
+from flask import Flask, render_template, request, jsonify
+import json
+import random
+import numpy as np
+import pickle
+from keras.models import load_model
+from nltk.stem import WordNetLemmatizer
+
+# Initialize Flask app
+app = Flask(__name__)
+
+# Load model and required files
+lemmatizer = WordNetLemmatizer()
+model = load_model('chatbot_model.h5')
+intents = json.loads(open('intents.json').read())
+words = pickle.load(open('words.pkl','rb'))
+classes = pickle.load(open('classes.pkl','rb'))
+
+# Clean up sentence
+def clean_up_sentence(sentence):
+    sentence_words = nltk.word_tokenize(sentence)
+    sentence_words = [lemmatizer.lemmatize(word.lower()) for word in sentence_words]
+    return sentence_words
+
+# Create bag of words
+def bow(sentence, words):
+    sentence_words = clean_up_sentence(sentence)
+    bag = [0]*len(words)  
+    for s in sentence_words:
+        for i, w in enumerate(words):
+            if w == s:
+                bag[i] = 1
+    return np.array(bag)
+
+# Predict class of intent
+def predict_class(sentence):
+    p = bow(sentence, words)
+    res = model.predict(np.array([p]))[0]
+    ERROR_THRESHOLD = 0.25
+    results = [[i, r] for i, r in enumerate(res) if r > ERROR_THRESHOLD]
+    results.sort(key=lambda x: x[1], reverse=True)
+    return [{"intent": classes[r[0]], "probability": str(r[1])} for r in results]
+
+# Get response from intent
+def get_response(intents_list):
+    if not intents_list:
+        return "Sorry, I didn't understand that."
+
+    tag = intents_list[0]['intent']
+    for intent in intents['intents']:
+        if intent['tag'] == tag:
+            return random.choice(intent['responses'])
+    return "Sorry, I couldn't find a suitable response."
+
+@app.route("/")
+def index():
+    return render_template('index.html')
+
+@app.route("/get_response", methods=['POST'])
+def chat():
+    user_message = request.form['user_message']
+    print("User message received:", user_message)  # Debugging line
+
+    if user_message.startswith('Button'):  # If message is from button
+        response = f"You clicked {user_message}"
+    else:
+        # Process normal user message
+        intents = predict_class(user_message)
+        print("Predicted intents:", intents)  # Debugging line
+        response = get_response(intents)
+
+    print("Response to send:", response)  # Debugging line
+    return jsonify({"response": response})
+
+if __name__ == "__main__":
+    app.run(debug=True)
