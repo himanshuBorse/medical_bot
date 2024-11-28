@@ -71,3 +71,77 @@ button:hover {
 .chat-button:hover {
     background-color: black;
 }
+
+/* Chat container */
+.chat-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Chat box */
+.chat-box {
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    background: white;
+}
+
+/* Input container */
+.input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Group buttons */
+.button-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Send and mic buttons */
+#send-button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#mic-button {
+    padding: 10px;
+    background-color: #28a745;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.mic-icon {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+/* Speak response button */
+#speak-button {
+    padding: 10px 15px;
+    background-color: #ffc107;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#speak-button:hover {
+    background-color: #e0a800;
+}
