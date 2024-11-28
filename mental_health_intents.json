@@ -1,0 +1,142 @@
+{
+    "intents": [
+      {
+        "tag": "mental_health_support",
+        "patterns": [
+          "I'm feeling stressed",
+          "I'm feeling anxious",
+          "I'm feeling overwhelmed",
+          "Can you help me with my stress?",
+          "I'm struggling with my emotions"
+        ],
+        "responses": [
+          "I'm really sorry you're feeling this way, but I'm here to help. Stress can be overwhelming, but taking small breaks, practicing deep breathing, and talking to someone you trust can help. It's important to prioritize self-care and reach out to a mental health professional if needed."
+        ]
+      },
+      {
+        "tag": "depression",
+        "patterns": [
+          "I feel really sad",
+          "I'm feeling depressed",
+          "I have no energy",
+          "I feel hopeless",
+          "Everything feels dark"
+        ],
+        "responses": [
+          "I'm really sorry you're feeling like this. Depression is tough, but you don’t have to face it alone. It's important to talk to someone you trust, whether it's a friend, family member, or mental health professional. Remember, help is available, and things can get better with the right support."
+        ]
+      },
+      {
+        "tag": "anxiety",
+        "patterns": [
+          "I feel anxious",
+          "I'm worried all the time",
+          "I can't calm down",
+          "I feel nervous about everything",
+          "I feel like something bad will happen"
+        ],
+        "responses": [
+          "Anxiety can be really difficult to deal with, but there are ways to manage it. Try breathing exercises, mindfulness, or grounding techniques. Take small steps each day, and don't hesitate to talk to a mental health professional for additional support."
+        ]
+      },
+      {
+        "tag": "panic_attack",
+        "patterns": [
+          "I'm having a panic attack",
+          "I can't breathe",
+          "My heart is racing",
+          "I feel like I'm losing control",
+          "I'm feeling dizzy and scared"
+        ],
+        "responses": [
+          "I'm really sorry you're experiencing this. If you're having a panic attack, try to focus on your breathing. Inhale slowly for 4 seconds, hold for 4, and exhale for 4. It can also help to find a quiet space and remind yourself that you're safe. If you continue to experience panic attacks, consider speaking to a professional for help."
+        ]
+      },
+      {
+        "tag": "self_care",
+        "patterns": [
+          "How can I take care of myself?",
+          "Give me self-care tips",
+          "What should I do for self-care?",
+          "I need to focus on my mental health"
+        ],
+        "responses": [
+          "Self-care is really important for your mental well-being. Try activities that make you feel relaxed and happy, like reading, taking a walk, practicing meditation, or journaling. Don't forget to get enough sleep, eat nutritious food, and stay hydrated. Taking time for yourself is not selfish—it's necessary."
+        ]
+      },
+      {
+        "tag": "therapy",
+        "patterns": [
+          "Should I see a therapist?",
+          "What is therapy?",
+          "How do I find a therapist?",
+          "Can therapy help me?",
+          "What should I expect from therapy?"
+        ],
+        "responses": [
+          "Therapy can be really beneficial for many mental health challenges. A therapist can help you understand and manage your feelings, thoughts, and behaviors. If you're considering therapy, it might be helpful to start by talking to your doctor or looking for a licensed professional. It’s a step toward feeling better."
+        ]
+      },
+      {
+        "tag": "support_groups",
+        "patterns": [
+          "Are there any support groups I can join?",
+          "Can I talk to others about my feelings?",
+          "Are there groups for people with mental health issues?",
+          "How do I find a support group?"
+        ],
+        "responses": [
+          "Support groups can be really helpful for connecting with others who understand what you're going through. You can search online for local or virtual support groups for specific issues, or ask a healthcare provider for recommendations. Sharing your experiences with others can be a great source of comfort."
+        ]
+      },
+      {
+        "tag": "loneliness",
+        "patterns": [
+          "I feel so lonely",
+          "I'm feeling isolated",
+          "No one understands me",
+          "I have no one to talk to"
+        ],
+        "responses": [
+          "I’m really sorry you’re feeling this way. Loneliness is tough, but it's important to reach out to someone you trust, whether it's a friend, family member, or support group. Even small interactions, like chatting with someone online or joining a group, can make a big difference in how you feel."
+        ]
+      },
+      {
+        "tag": "self_esteem",
+        "patterns": [
+          "I don't feel good about myself",
+          "I don't like who I am",
+          "I'm not good enough",
+          "How can I improve my self-esteem?"
+        ],
+        "responses": [
+          "It's normal to have ups and downs in how you feel about yourself, but remember that you are valuable and unique. Try practicing positive affirmations, focusing on your strengths, and setting small goals. Therapy can also help if you’re struggling with self-esteem."
+        ]
+      },
+      {
+        "tag": "sleep_issues",
+        "patterns": [
+          "I can't sleep",
+          "I'm having trouble sleeping",
+          "I can't get a good night's rest",
+          "How can I improve my sleep?"
+        ],
+        "responses": [
+          "Good sleep is essential for mental and physical health. Try to maintain a regular sleep schedule, avoid screens before bed, and create a relaxing bedtime routine. If sleep problems persist, it might be helpful to talk to a healthcare provider."
+        ]
+      },
+      {
+        "tag": "anger_management",
+        "patterns": [
+          "I get really angry",
+          "I don't know how to manage my anger",
+          "How can I stop being so angry?",
+          "I'm always angry"
+        ],
+        "responses": [
+          "Anger can be tough to manage, but there are ways to cope. Try deep breathing, physical activity, or taking a moment to step away from the situation. If anger is affecting your daily life, speaking with a therapist can help you understand and manage your emotions."
+        ]
+      }
+    ]
+  }
+  

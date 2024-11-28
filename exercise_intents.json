@@ -1,0 +1,137 @@
+{
+    "intents": [
+      {
+        "tag": "exercise_tips",
+        "patterns": [
+          "Give me some exercise tips",
+          "Can you suggest some exercises?",
+          "What are some good workouts?",
+          "Tell me about exercises",
+          "What exercises should I try?"
+        ],
+        "responses": [
+          "Here are a few exercise tips to get you started: 1) Start with a warm-up to avoid injury. 2) Focus on form and technique. 3) Include both strength and cardio exercises in your routine. 4) Stretch after your workout to improve flexibility."
+        ]
+      },
+      {
+        "tag": "strength_training",
+        "patterns": [
+          "What are good strength training exercises?",
+          "Can you give me tips on strength training?",
+          "What exercises help build muscle?",
+          "What should I do to increase strength?"
+        ],
+        "responses": [
+          "Strength training exercises like squats, deadlifts, push-ups, and bench presses are great for building muscle. Start with lighter weights to perfect your form before progressing to heavier ones."
+        ]
+      },
+      {
+        "tag": "cardio_exercises",
+        "patterns": [
+          "What are some good cardio exercises?",
+          "Can you suggest some cardio workouts?",
+          "How can I improve my cardiovascular health?",
+          "Give me cardio workout tips"
+        ],
+        "responses": [
+          "Cardio exercises like running, cycling, swimming, and jumping rope are excellent for improving cardiovascular health. Aim for at least 150 minutes of moderate cardio per week."
+        ]
+      },
+      {
+        "tag": "core_workouts",
+        "patterns": [
+          "What are good core exercises?",
+          "Can you recommend some core workouts?",
+          "How do I strengthen my core?",
+          "What exercises should I do for my abs?"
+        ],
+        "responses": [
+          "Core exercises like planks, crunches, leg raises, and Russian twists are fantastic for strengthening your core. Aim to engage your core during every workout to improve stability and posture."
+        ]
+      },
+      {
+        "tag": "stretching",
+        "patterns": [
+          "What stretches should I do before exercising?",
+          "Can you recommend stretches for flexibility?",
+          "How do I stretch before a workout?",
+          "Give me stretching tips"
+        ],
+        "responses": [
+          "Before exercising, try dynamic stretches like leg swings, arm circles, and torso twists. After your workout, static stretches like hamstring stretches and shoulder stretches can help improve flexibility."
+        ]
+      },
+      {
+        "tag": "beginner_exercises",
+        "patterns": [
+          "I’m new to exercise, what should I start with?",
+          "What are some easy exercises for beginners?",
+          "Can you suggest beginner-friendly workouts?",
+          "What exercises are good for a beginner?"
+        ],
+        "responses": [
+          "If you're a beginner, start with bodyweight exercises like squats, lunges, push-ups, and planks. Begin with low-intensity workouts, and gradually increase the duration and intensity as you progress."
+        ]
+      },
+      {
+        "tag": "post_workout_recovery",
+        "patterns": [
+          "What should I do after a workout?",
+          "How can I recover after exercising?",
+          "What are some post-workout recovery tips?",
+          "How to recover from exercise?"
+        ],
+        "responses": [
+          "After a workout, remember to cool down with light cardio and stretching. Hydrate, and if needed, have a post-workout snack rich in protein to help repair muscles."
+        ]
+      },
+      {
+        "tag": "exercise_motivation",
+        "patterns": [
+          "I need some motivation to work out.",
+          "How can I stay motivated to exercise?",
+          "What are some tips for sticking to an exercise routine?",
+          "Give me motivation to work out"
+        ],
+        "responses": [
+          "Stay motivated by setting achievable fitness goals and tracking your progress. Remember that consistency is key, and even small improvements can make a big difference."
+        ]
+      },
+      {
+        "tag": "exercise_during_pregnancy",
+        "patterns": [
+          "What exercises can I do while pregnant?",
+          "Can I exercise during pregnancy?",
+          "What are safe exercises during pregnancy?"
+        ],
+        "responses": [
+          "During pregnancy, low-impact exercises like walking, swimming, and prenatal yoga are safe and beneficial. Always consult your doctor before starting a new exercise routine during pregnancy."
+        ]
+      },
+      {
+        "tag": "exercise_for_seniors",
+        "patterns": [
+          "What are good exercises for seniors?",
+          "How can seniors stay fit?",
+          "Can you suggest some exercises for older adults?",
+          "What exercises should seniors do?"
+        ],
+        "responses": [
+          "For seniors, low-impact exercises like walking, swimming, and chair yoga are great for maintaining flexibility and strength. Focus on balance and joint-friendly exercises."
+        ]
+      },
+      {
+        "tag": "hydration_and_exercise",
+        "patterns": [
+          "How much water should I drink while exercising?",
+          "Should I hydrate before or after exercise?",
+          "Can you give me hydration tips for exercise?",
+          "How to stay hydrated during a workout?"
+        ],
+        "responses": [
+          "It's important to stay hydrated before, during, and after your workout. Aim to drink 8 oz of water 20-30 minutes before exercising, and continue sipping water during your workout, especially for intense or long sessions."
+        ]
+      }
+    ]
+  }
+  

@@ -10,19 +10,24 @@
 </head>
 <body>
     <div class="chat-container">
+        <!-- New Buttons for Diet, Exercise, Mental Health Support -->
+        <div class="top-buttons">
+            <button id="diet-button">Diet</button>
+            <button id="exercise-button">Exercise</button>
+            <button id="mental-health-button">Mental Health Support</button>
+        </div>
+
         <div class="chat-box" id="chat-box">
             <!-- Chat messages will appear here -->
         </div>
         
-        <!-- Removed unnecessary buttons, only send and mic remain -->
+        <!-- Input and Mic -->
         <div class="input-container">
             <input type="text" id="user-message" placeholder="Type a message...">
-            
-            <!-- Grouped Send and Mic buttons -->
             <div class="button-group">
                 <button id="send-button">Send</button>
                 <button id="mic-button" class="mic-btn">
-                    <i class="fas fa-microphone mic-icon"></i> <!-- FontAwesome Mic Icon -->
+                    <i class="fas fa-microphone mic-icon"></i>
                 </button>
             </div>
         </div>
@@ -31,100 +36,6 @@
         <button id="speak-button" style="margin-top: 10px;">Speak Response</button>
     </div>
 
-    <script>
-        // Function to read text aloud using SpeechSynthesis
-        let lastResponse = ''; // Variable to store the latest bot response
-
-        function speakMessage(message) {
-            var msg = new SpeechSynthesisUtterance(message);
-            window.speechSynthesis.speak(msg);
-        }
-
-        // Send message when "Send" button is clicked
-        document.getElementById('send-button').addEventListener('click', function() {
-            var userMessage = document.getElementById('user-message').value;
-            if (userMessage) {
-                addMessage('You: ' + userMessage);
-                document.getElementById('user-message').value = '';
-
-                fetch('/get_response', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: 'user_message=' + userMessage
-                })
-                .then(response => response.json())
-                .then(data => {
-                    addMessage('Bot: ' + data.response);
-                    lastResponse = data.response; // Save the latest bot response
-                });
-            }
-        });
-
-        // Function to add message to the chatbox
-        function addMessage(message) {
-            var chatBox = document.getElementById('chat-box');
-            var messageDiv = document.createElement('div');
-            messageDiv.classList.add('message');
-            messageDiv.textContent = message;
-            chatBox.appendChild(messageDiv);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-
-        // Voice recognition for mic button
-        const micButton = document.getElementById('mic-button');
-        const userMessageInput = document.getElementById('user-message');
-
-        // Initialize SpeechRecognition
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        const recognition = new SpeechRecognition();
-
-        recognition.continuous = false;
-        recognition.interimResults = false;
-        recognition.lang = 'en-US';
-
-        micButton.addEventListener('click', function() {
-            recognition.start(); // Start listening for voice input
-        });
-
-        recognition.onresult = function(event) {
-            // Get the speech text from the result
-            const speechText = event.results[0][0].transcript;
-
-            // Set the text in the input field
-            userMessageInput.value = speechText;
-
-            // Optionally, send it directly to the bot (send as if typed by the user)
-            addMessage('You: ' + speechText);
-
-            fetch('/get_response', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'user_message=' + speechText
-            })
-            .then(response => response.json())
-            .then(data => {
-                addMessage('Bot: ' + data.response);
-                lastResponse = data.response; // Save the latest bot response
-            });
-        };
-
-        recognition.onerror = function(event) {
-            console.error('Speech recognition error', event);
-            alert('Sorry, I didn’t catch that. Please try again.');
-        };
-
-        // Speak the latest response when "Speak Response" button is clicked
-        document.getElementById('speak-button').addEventListener('click', function() {
-            if (lastResponse) {
-                speakMessage(lastResponse); // Read out the latest bot response
-            } else {
-                alert('No response to read aloud yet.');
-            }
-        });
-    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

@@ -145,3 +145,21 @@ button:hover {
 #speak-button:hover {
     background-color: #e0a800;
 }
+
+/* In your CSS file (style.css) */
+button.active {
+    background-color: #4CAF50;  /* Green for active button */
+    color: white;
+}
+
+button {
+    background-color: #f1f1f1;  /* Default color */
+    color: black;
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ddd;
+}

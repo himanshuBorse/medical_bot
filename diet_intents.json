@@ -1,0 +1,149 @@
+{
+    "intents": [
+      {
+        "tag": "healthy_eating",
+        "patterns": [
+          "What is a healthy diet?",
+          "Give me some healthy eating tips",
+          "How can I eat healthier?",
+          "What should I eat to stay healthy?"
+        ],
+        "responses": [
+          "A healthy diet includes a variety of foods from all the food groups: fruits, vegetables, whole grains, protein sources (like lean meats, beans, and nuts), and healthy fats. Try to limit processed foods, sugars, and unhealthy fats. Drinking plenty of water and maintaining portion control are also important for overall health."
+        ]
+      },
+      {
+        "tag": "weight_loss",
+        "patterns": [
+          "How can I lose weight?",
+          "What are the best foods for weight loss?",
+          "Give me some weight loss tips",
+          "How do I get rid of belly fat?"
+        ],
+        "responses": [
+          "For weight loss, focus on eating a balanced diet with a caloric deficit. Include plenty of vegetables, fruits, lean proteins, and whole grains. Avoid sugary foods and snacks. Regular physical activity, along with eating in moderation, can help you lose weight safely. Remember, weight loss should be gradual and sustainable."
+        ]
+      },
+      {
+        "tag": "meal_planning",
+        "patterns": [
+          "How do I plan my meals?",
+          "Give me tips for meal planning",
+          "How can I plan my meals for the week?",
+          "What should I include in my meals?"
+        ],
+        "responses": [
+          "Meal planning is a great way to ensure you’re eating nutritious and balanced meals throughout the week. Start by planning your meals around lean proteins (chicken, fish, beans), vegetables, whole grains (brown rice, quinoa), and healthy fats (avocado, olive oil). Make a shopping list, and try to prepare meals ahead of time to save time during the week."
+        ]
+      },
+      {
+        "tag": "portion_control",
+        "patterns": [
+          "How can I control my portions?",
+          "What is portion control?",
+          "Give me tips for portion control",
+          "How do I stop overeating?"
+        ],
+        "responses": [
+          "Portion control is key to maintaining a healthy weight. Try using smaller plates, measuring your food, and being mindful of portion sizes. It's also helpful to eat slowly and stop eating when you’re satisfied, not full. Pay attention to hunger cues and avoid eating out of boredom or stress."
+        ]
+      },
+      {
+        "tag": "hydration",
+        "patterns": [
+          "How much water should I drink?",
+          "What is the best way to stay hydrated?",
+          "How can I drink more water?",
+          "Why is drinking water important?"
+        ],
+        "responses": [
+          "Staying hydrated is essential for overall health. The general recommendation is to drink at least 8 glasses (about 2 liters) of water per day, but this can vary depending on factors like age, weight, and physical activity. Drinking water helps with digestion, energy levels, skin health, and more. Carry a water bottle with you to make it easier to stay hydrated throughout the day."
+        ]
+      },
+      {
+        "tag": "low_carbs",
+        "patterns": [
+          "What is a low-carb diet?",
+          "Give me low-carb meal ideas",
+          "Should I follow a low-carb diet?",
+          "What are the benefits of a low-carb diet?"
+        ],
+        "responses": [
+          "A low-carb diet involves reducing your intake of carbohydrates like bread, pasta, and sugary foods, and focusing on protein, healthy fats, and vegetables. It may help with weight loss and controlling blood sugar. Popular low-carb diets include the ketogenic diet and the Atkins diet. However, it’s important to ensure you're getting enough nutrients from other food sources, like vegetables and healthy fats."
+        ]
+      },
+      {
+        "tag": "vegetarian_diet",
+        "patterns": [
+          "What is a vegetarian diet?",
+          "Give me some vegetarian meal ideas",
+          "Can a vegetarian diet be healthy?",
+          "What should a vegetarian eat?"
+        ],
+        "responses": [
+          "A vegetarian diet excludes meat but includes fruits, vegetables, legumes, nuts, seeds, dairy, and eggs (if you're an ovo-lacto vegetarian). To make sure you get all the essential nutrients, focus on a variety of plant-based foods, including beans, lentils, whole grains, and fortified products. Consider adding sources of vitamin B12, iron, and omega-3 fatty acids."
+        ]
+      },
+      {
+        "tag": "vegan_diet",
+        "patterns": [
+          "What is a vegan diet?",
+          "Give me some vegan meal ideas",
+          "What should I eat on a vegan diet?",
+          "Can a vegan diet be healthy?"
+        ],
+        "responses": [
+          "A vegan diet excludes all animal products, including meat, dairy, eggs, and honey. It focuses on plant-based foods like fruits, vegetables, legumes, whole grains, nuts, and seeds. Make sure to include sources of protein, iron, calcium, and vitamin B12, which are often found in plant-based alternatives or supplements."
+        ]
+      },
+      {
+        "tag": "gluten_free_diet",
+        "patterns": [
+          "What is a gluten-free diet?",
+          "What can I eat on a gluten-free diet?",
+          "Give me gluten-free meal ideas",
+          "Is gluten-free good for you?"
+        ],
+        "responses": [
+          "A gluten-free diet excludes foods that contain gluten, a protein found in wheat, barley, and rye. It is essential for people with celiac disease or gluten sensitivity. You can eat gluten-free grains like rice, quinoa, and corn, as well as fruits, vegetables, and lean proteins. Many gluten-free products are available, but it's important to choose whole foods to ensure you're getting a nutritious diet."
+        ]
+      },
+      {
+        "tag": "snack_ideas",
+        "patterns": [
+          "Give me healthy snack ideas",
+          "What are good snacks for weight loss?",
+          "What should I snack on?",
+          "Give me some quick healthy snacks"
+        ],
+        "responses": [
+          "Healthy snacks can keep you energized and satisfied between meals. Some great options include: fruits (apple, banana, berries), nuts (almonds, walnuts), yogurt, hummus with veggies, and whole-grain crackers. Opt for snacks that are high in protein and fiber, which can help keep you full longer."
+        ]
+      },
+      {
+        "tag": "sugar_intake",
+        "patterns": [
+          "How can I reduce my sugar intake?",
+          "Is sugar bad for you?",
+          "How do I stop craving sugar?",
+          "What are the effects of too much sugar?"
+        ],
+        "responses": [
+          "Reducing sugar intake is important for maintaining a healthy weight and managing blood sugar levels. Try to limit sugary beverages like sodas and juices, and opt for natural sweeteners like fruit. Eating whole foods like vegetables, fruits, and whole grains can help reduce sugar cravings. Gradually reduce sugar in your diet to give your taste buds time to adjust."
+        ]
+      },
+      {
+        "tag": "nutrition_for_energy",
+        "patterns": [
+          "What foods give you energy?",
+          "How can I boost my energy with food?",
+          "Give me some energy-boosting foods",
+          "What should I eat to stay energized?"
+        ],
+        "responses": [
+          "To boost energy levels, focus on foods that are rich in complex carbohydrates, healthy fats, and proteins. Some energy-boosting foods include whole grains (oats, quinoa), fruits (bananas, berries), leafy greens, nuts, seeds, and lean proteins (chicken, tofu, legumes). Stay hydrated and avoid high-sugar foods that can lead to energy crashes."
+        ]
+      }
+    ]
+  }
+  
