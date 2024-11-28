@@ -163,3 +163,33 @@ button {
 button:hover {
     background-color: #ddd;
 }
+/* Default message style */
+.message {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f1f1f1; /* Default background */
+    color: #333; /* Default text color */
+}
+
+/* Style for "You selected" messages */
+.selected-mode-message {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+}
+
+/* Style for "Mode reset" messages */
+.reset-mode-message {
+    background-color: #FF6347; /* Tomato background */
+    color: white; /* White text */
+}
+
+/* Style for other types of messages */
+#chat-box {
+    padding: 20px;
+    max-height: 400px;
+    overflow-y: scroll;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}

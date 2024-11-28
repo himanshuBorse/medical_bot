@@ -1,4 +1,3 @@
-// This is where your previously written JavaScript code will go
 let lastResponse = ''; // Variable to store the latest bot response
 let currentMode = ''; // Track which mode the user is in (diet, exercise, mental health)
 let isModeSelected = false; // Flag to track if a mode has been selected
@@ -14,12 +13,12 @@ document.getElementById('diet-button').addEventListener('click', function() {
     if (currentMode === 'diet') {
         // If already in Diet mode, reset to default
         currentMode = ''; // Reset to default mode
-        addMessage('Mode reset to default.');
+        addMessage('Mode reset to default.', 'reset');
         updateActiveButton('');
         isModeSelected = false;
     } else {
         currentMode = 'diet'; // Switch mode to Diet
-        addMessage('You selected: Diet');
+        addMessage('You selected: Diet', 'selected');
         updateActiveButton('diet');
         isModeSelected = true;
     }
@@ -29,12 +28,12 @@ document.getElementById('exercise-button').addEventListener('click', function() 
     if (currentMode === 'exercise') {
         // If already in Exercise mode, reset to default
         currentMode = ''; // Reset to default mode
-        addMessage('Mode reset to default.');
+        addMessage('Mode reset to default.', 'reset');
         updateActiveButton('');
         isModeSelected = false;
     } else {
         currentMode = 'exercise'; // Switch mode to Exercise
-        addMessage('You selected: Exercise');
+        addMessage('You selected: Exercise', 'selected');
         updateActiveButton('exercise');
         isModeSelected = true;
     }
@@ -44,12 +43,12 @@ document.getElementById('mental-health-button').addEventListener('click', functi
     if (currentMode === 'mental_health') {
         // If already in Mental Health mode, reset to default
         currentMode = ''; // Reset to default mode
-        addMessage('Mode reset to default.');
+        addMessage('Mode reset to default.', 'reset');
         updateActiveButton('');
         isModeSelected = false;
     } else {
         currentMode = 'mental_health'; // Switch mode to Mental Health
-        addMessage('You selected: Mental Health Support');
+        addMessage('You selected: Mental Health Support', 'selected');
         updateActiveButton('mental_health');
         isModeSelected = true;
     }
@@ -98,10 +97,18 @@ document.getElementById('send-button').addEventListener('click', function() {
 });
 
 // Function to add message to the chatbox
-function addMessage(message) {
+function addMessage(message, type = '') {
     var chatBox = document.getElementById('chat-box');
     var messageDiv = document.createElement('div');
     messageDiv.classList.add('message');
+    
+    // Add a class based on the message type (selected or reset)
+    if (type === 'selected') {
+        messageDiv.classList.add('selected-mode-message'); // Add class for selected mode
+    } else if (type === 'reset') {
+        messageDiv.classList.add('reset-mode-message'); // Add class for reset mode
+    }
+
     messageDiv.textContent = message;
     chatBox.appendChild(messageDiv);
     chatBox.scrollTop = chatBox.scrollHeight;
