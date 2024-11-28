@@ -161,3 +161,47 @@ document.getElementById('speak-button').addEventListener('click', function() {
         alert('No response to read aloud yet.');
     }
 });
+
+
+// Function to add message to chatbox
+function appendMessageToChatbox(message, isUserMessage = false, showAppointmentIcon = false) {
+    const chatBox = document.getElementById('chat-box');
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('chat-message');
+    messageDiv.classList.add(isUserMessage ? 'user' : 'bot');
+    messageDiv.innerHTML = message;
+
+    // If it's from the default model, add the appointment icon
+    if (showAppointmentIcon) {
+        const appointmentIcon = `<i class="fas fa-calendar-check appointment-icon" title="Book Appointment"></i>`;
+        messageDiv.innerHTML += appointmentIcon;
+    }
+
+    chatBox.appendChild(messageDiv);
+    chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom
+}
+
+// Handle send button for chat
+document.getElementById('send-button').addEventListener('click', function() {
+    const userMessage = document.getElementById('user-message').value;
+    if (userMessage.trim() !== '') {
+        appendMessageToChatbox("You: " + userMessage, true);
+
+        // Send message to server for chatbot response
+        fetch('/get_response', {
+            method: 'POST',
+            body: new URLSearchParams({
+                'user_message': userMessage,
+                'mode': 'default' // Adjust this based on your mode (diet, exercise, etc.)
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const botResponse = data.response;
+            const showAppointmentIcon = data.show_appointment_icon;
+            appendMessageToChatbox(botResponse, false, showAppointmentIcon);
+        })
+        .catch(error => console.error('Error:', error));
+    }
+});
+

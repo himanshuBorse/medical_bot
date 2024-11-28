@@ -7,10 +7,39 @@
     <!-- Include FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .bmi-form {
+            display: flex;
+            flex-direction: column;
+            margin: 10px 0;
+        }
+        .bmi-form input {
+            margin: 5px 0;
+            padding: 8px;
+            font-size: 14px;
+        }
+        .bmi-form button {
+            padding: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .chat-message.bot {
+            background-color: #f1f1f1;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        .chat-message.user {
+            background-color: #d1e7dd;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            text-align: right;
+        }
+    </style>
 </head>
 <body>
     <div class="chat-container">
-        <!-- New Buttons for Diet, Exercise, Mental Health Support -->
         <div class="top-buttons">
             <button id="diet-button">Diet</button>
             <button id="exercise-button">Exercise</button>
@@ -32,10 +61,101 @@
             </div>
         </div>
 
+        <!-- BMI Calculator Button -->
+        <button id="bmi-calculator-button" style="margin-top: 10px;">Calculate BMI</button>
+
         <!-- Speak Response button -->
         <button id="speak-button" style="margin-top: 10px;">Speak Response</button>
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        // Function to add message to chatbox
+        function appendMessageToChatbox(message, isUserMessage = false) {
+            const chatBox = document.getElementById('chat-box');
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message');
+            messageDiv.classList.add(isUserMessage ? 'user' : 'bot');
+            messageDiv.innerHTML = message;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom
+        }
+
+        // Handle send button for chat
+        document.getElementById('send-button').addEventListener('click', function() {
+            const userMessage = document.getElementById('user-message').value;
+            if (userMessage.trim() !== '') {
+                appendMessageToChatbox("You: " + userMessage, true);
+
+                // Send message to server for chatbot response
+                fetch('/get_response', {
+                    method: 'POST',
+                    body: new URLSearchParams({
+                        'user_message': userMessage,
+                        'mode': 'default'
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    appendMessageToChatbox("Bot: " + data.response);
+                });
+
+                document.getElementById('user-message').value = '';  // Clear the input box
+            }
+        });
+
+        // Handle BMI Calculator Button Click
+        document.getElementById('bmi-calculator-button').addEventListener('click', function() {
+            // Show the BMI form in the chatbox
+            const bmiFormHtml = `
+                <div class="bmi-form">
+                    <p>Bot: Please enter your weight and height to calculate your BMI:</p>
+                    <label for="weight">Weight (kg):</label>
+                    <input type="number" id="weight" name="weight" required><br>
+                    <label for="height">Height (cm):</label>
+                    <input type="number" id="height" name="height" required><br>
+                    <button type="button" id="calculate-bmi-button">Calculate BMI</button>
+                </div>
+            `;
+            appendMessageToChatbox(bmiFormHtml); // Append the form to the chatbox
+        });
+
+        // Handle BMI Form Submission
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.id === 'calculate-bmi-button') {
+                const weight = document.getElementById('weight').value;
+                const height = document.getElementById('height').value;
+
+                // Check if weight and height are provided
+                if (weight && height) {
+                    // Calculate BMI
+                    const heightInMeters = height / 100; // Convert height from cm to meters
+                    const bmi = weight / (heightInMeters * heightInMeters);
+
+                    // Round BMI to 2 decimal places
+                    const bmiCategory = getBMICategory(bmi);
+                    const bmiMessage = `Your BMI is: ${bmi.toFixed(2)}. Category: ${bmiCategory}`;
+
+                    // Append the result to the chatbox
+                    appendMessageToChatbox(bmiMessage);
+                } else {
+                    appendMessageToChatbox("Please enter both weight and height.");
+                }
+            }
+        });
+
+        // Function to determine BMI category
+        function getBMICategory(bmi) {
+            if (bmi < 18.5) {
+                return "Underweight";
+            } else if (bmi >= 18.5 && bmi < 24.9) {
+                return "Normal weight";
+            } else if (bmi >= 25 && bmi < 29.9) {
+                return "Overweight";
+            } else {
+                return "Obesity";
+            }
+        }
+    </script>
 </body>
 </html>

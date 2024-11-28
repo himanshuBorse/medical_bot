@@ -55,6 +55,23 @@ def get_response(intents_list, intents):
             return random.choice(intent['responses'])
     return "Sorry, I couldn't find a suitable response."
 
+# BMI calculation function
+def calculate_bmi(weight, height):
+    height_in_meters = float(height) / 100  # Convert height from cm to meters
+    bmi = float(weight) / (height_in_meters * height_in_meters)
+    category = ''
+
+    if bmi < 18.5:
+        category = 'Underweight'
+    elif bmi >= 18.5 and bmi < 24.9:
+        category = 'Normal weight'
+    elif bmi >= 25 and bmi < 29.9:
+        category = 'Overweight'
+    else:
+        category = 'Obesity'
+    
+    return round(bmi, 2), category
+
 @app.route("/")
 def index():
     return render_template('index.html')
@@ -91,6 +108,39 @@ def chat():
     response = get_response(intents_list, intents)
 
     return jsonify({"response": response})
+
+# BMI Calculator Route
+@app.route("/calculate_bmi", methods=['POST'])
+def bmi_calculator():
+    weight = request.form.get('weight')
+    height = request.form.get('height')
+    
+    if weight and height:
+        bmi, category = calculate_bmi(weight, height)
+        return jsonify({"bmi": bmi, "category": category})
+    else:
+        return jsonify({"error": "Please provide both weight and height"}), 400
+
+# Appointment Booking Route (only for default model)
+@app.route("/book_appointment", methods=['POST'])
+def book_appointment():
+    user_message = request.form['user_message']
+    mode = request.form.get('mode', 'default')  # Default to 'default' if no mode specified
+
+    # Check if the selected mode is 'default' (i.e., doctor appointment is allowed only in this mode)
+    if mode == 'default':
+        # Get appointment details from user message
+        appointment_date = request.form.get('appointment_date')
+        appointment_time = request.form.get('appointment_time')
+        doctor_name = request.form.get('doctor_name')
+
+        if appointment_date and appointment_time and doctor_name:
+            # Here you would normally save to a database, but for simplicity, we just return a confirmation
+            return jsonify({"message": f"Appointment booked with Dr. {doctor_name} on {appointment_date} at {appointment_time}."})
+        else:
+            return jsonify({"error": "Please provide all appointment details (date, time, doctor name)."}), 400
+    else:
+        return jsonify({"error": "Appointments can only be booked in default mode."}), 400
 
 if __name__ == "__main__":
     app.run(debug=True)
