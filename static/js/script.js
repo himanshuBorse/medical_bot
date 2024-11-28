@@ -204,4 +204,99 @@ document.getElementById('send-button').addEventListener('click', function() {
         .catch(error => console.error('Error:', error));
     }
 });
+    // Show the appointment form modal when hamburger menu is clicked
+    document.getElementById('hamburger-menu').addEventListener('click', function() {
+        const modal = document.getElementById("appointmentModal");
+        modal.style.display = "block";  // Show the modal
+    });
 
+    // Close the modal when user clicks the "X" button
+    document.getElementById('close-modal').addEventListener('click', function() {
+        const modal = document.getElementById("appointmentModal");
+        modal.style.display = "none";  // Close the modal
+    });
+
+    // Close the modal if the user clicks outside the modal content
+    window.addEventListener('click', function(event) {
+        const modal = document.getElementById("appointmentModal");
+        if (event.target === modal) {
+            modal.style.display = "none";  // Close the modal
+        }
+    });
+
+    // Handle appointment form submission (Optional: You can handle form submission here)
+    document.getElementById('book-appointment-button').addEventListener('click', function() {
+        const name = document.getElementById('appointment-name').value;
+        const date = document.getElementById('appointment-date').value;
+        const time = document.getElementById('appointment-time').value;
+
+        // Check if all fields are filled
+        if (name && date && time) {
+            // For demo purposes, log the appointment details
+            console.log(`Appointment Booked: ${name} | ${date} | ${time}`);
+            // Optionally, close the modal after booking the appointment
+            const modal = document.getElementById("appointmentModal");
+            modal.style.display = "none";  // Close the modal after booking
+        } else {
+            alert("Please fill in all fields.");
+        }
+    });
+    // Show the appointment form modal when hamburger menu is clicked
+    document.getElementById('hamburger-menu').addEventListener('click', function() {
+        const modal = document.getElementById("appointmentModal");
+        modal.style.display = "block";  // Show the modal
+    });
+
+    // Close the modal when user clicks the "X" button
+    document.getElementById('close-modal').addEventListener('click', function() {
+        const modal = document.getElementById("appointmentModal");
+        modal.style.display = "none";  // Close the modal
+    });
+
+    // Close the modal if the user clicks outside the modal content
+    window.addEventListener('click', function(event) {
+        const modal = document.getElementById("appointmentModal");
+        if (event.target === modal) {
+            modal.style.display = "none";  // Close the modal
+        }
+    });
+
+    // Date validation: Allow only current date or future dates
+    const appointmentDateInput = document.getElementById('appointment-date');
+    const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+    appointmentDateInput.setAttribute('min', today); // Set the minimum date to today
+
+    // Time validation: Allow only time from 9:00 AM to 11:00 PM
+    const appointmentTimeInput = document.getElementById('appointment-time');
+    appointmentTimeInput.setAttribute('min', '09:00'); // Set the minimum time to 09:00 AM
+    appointmentTimeInput.setAttribute('max', '23:00'); // Set the maximum time to 11:00 PM
+
+    // Handle appointment form submission
+    document.getElementById('book-appointment-button').addEventListener('click', function() {
+        const name = document.getElementById('appointment-name').value;
+        const email = document.getElementById('appointment-email').value;
+        const date = document.getElementById('appointment-date').value;
+        const time = document.getElementById('appointment-time').value;
+
+        // Simple email validation (basic check)
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailPattern.test(email)) {
+            alert("Please enter a valid email address.");
+            return;
+        }
+
+        // Check if all fields are filled
+        if (name && email && date && time) {
+            // For demo purposes, log the appointment details
+            console.log(`Appointment Booked: ${name} | ${email} | ${date} | ${time}`);
+            
+            // Display success message
+            alert("Your booking has been done successfully. We will remind you for the appointment!");
+
+            // Optionally, close the modal after booking the appointment
+            const modal = document.getElementById("appointmentModal");
+            modal.style.display = "none";  // Close the modal after booking
+        } else {
+            alert("Please fill in all fields.");
+        }
+    });

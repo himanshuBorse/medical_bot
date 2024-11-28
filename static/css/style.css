@@ -194,3 +194,79 @@ button:hover {
     border-radius: 10px;
 }
 
+
+.bmi-form {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+.bmi-form input {
+    margin: 5px 0;
+    padding: 8px;
+    font-size: 14px;
+}
+.bmi-form button {
+    padding: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.chat-message.bot {
+    background-color: #f1f1f1;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+.chat-message.user {
+    background-color: #d1e7dd;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    text-align: right;
+}
+.button-container {
+    margin-top: 10px;
+}
+.disease-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+}
+.top-buttons button {
+    margin-right: 10px;
+}
+.top-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+/* Hamburger Menu Styling */
+#hamburger-menu {
+    font-size: 10px;
+    color: #4CAF50; /* Green color */
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    margin-left: 10px;
+}
+
+/* Appointment Form Styling */
+.appointment-form {
+    display: none;
+    flex-direction: column;
+    margin-top: 10px;
+}
+.appointment-form input {
+    margin: 5px 0;
+    padding: 8px;
+    font-size: 14px;
+}
+.appointment-form button {
+    padding: 10px;
+    font-size: 14px;
+    cursor: pointer;
+}

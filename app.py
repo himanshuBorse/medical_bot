@@ -72,6 +72,32 @@ def calculate_bmi(weight, height):
     
     return round(bmi, 2), category
 
+@app.route("/book_appointment", methods=['POST'])
+def book_appointment():
+    if request.form.get('mode') != 'default':
+        return jsonify({"error": "Appointment booking is available only for default mode."}), 400
+    
+    # Extract the appointment details
+    name = request.form.get('name')
+    date = request.form.get('date')
+    time = request.form.get('time')
+    
+    if not name or not date or not time:
+        return jsonify({"error": "Please provide name, date, and time for the appointment."}), 400
+    
+    # For now, you can just store the appointment data or print it
+    # Ideally, you would store it in a database
+    appointment_details = {
+        "name": name,
+        "date": date,
+        "time": time
+    }
+    
+    # Print appointment (for demo purposes)
+    print(f"New appointment booked: {appointment_details}")
+    
+    return jsonify({"success": "Your appointment has been booked successfully!"})
+
 @app.route("/")
 def index():
     return render_template('index.html')
@@ -121,26 +147,6 @@ def bmi_calculator():
     else:
         return jsonify({"error": "Please provide both weight and height"}), 400
 
-# Appointment Booking Route (only for default model)
-@app.route("/book_appointment", methods=['POST'])
-def book_appointment():
-    user_message = request.form['user_message']
-    mode = request.form.get('mode', 'default')  # Default to 'default' if no mode specified
-
-    # Check if the selected mode is 'default' (i.e., doctor appointment is allowed only in this mode)
-    if mode == 'default':
-        # Get appointment details from user message
-        appointment_date = request.form.get('appointment_date')
-        appointment_time = request.form.get('appointment_time')
-        doctor_name = request.form.get('doctor_name')
-
-        if appointment_date and appointment_time and doctor_name:
-            # Here you would normally save to a database, but for simplicity, we just return a confirmation
-            return jsonify({"message": f"Appointment booked with Dr. {doctor_name} on {appointment_date} at {appointment_time}."})
-        else:
-            return jsonify({"error": "Please provide all appointment details (date, time, doctor name)."}), 400
-    else:
-        return jsonify({"error": "Appointments can only be booked in default mode."}), 400
 
 if __name__ == "__main__":
     app.run(debug=True)
